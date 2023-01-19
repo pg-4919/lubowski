@@ -1,0 +1,47 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.board {
+    display: block;
+    border-spacing: 0px;
+    margin: auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.cell {
+    border: none;
+    min-width: 55px;
+    max-width: 55px;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    outline: 1px solid transparent;
+    transition: outline 0.3s;
+}
+
+.cell:hover {
+    outline: 1px solid black;
+}
+
+
+.odd {
+    background: #ffcc99;
+}
+
+.even {
+    background: white;
+}
+
+
+.piece {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    display: block;
+}
