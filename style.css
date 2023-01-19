@@ -1,41 +1,50 @@
 html,
 body {
+    background-color: #333333;
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
-
 .board {
-    display: block;
-    border-spacing: 0px;
-    margin: auto;
-    margin-left:auto;
-    margin-right:auto;
+    background-color: white;
+    margin: 5vh auto;
+    align-self: center;
+    border-spacing: 0;
 }
 
 .cell {
+    height: 10vh;
+    width: 10vh;
+    min-width: 10vh;
+    max-width: 10vh;
+
     border: none;
-    min-width: 55px;
-    max-width: 55px;
-    width: 55px;
-    height: 55px;
-    text-align: center;
     outline: 1px solid transparent;
-    transition: outline 0.3s;
+
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+    user-select: none;
+
+    transition: outline 0.2s,
+        background-color 0.2s;
+}
+
+.cell.odd {
+    background-color: #ffcc99;
+}
+
+.cell.even {
+    background-color: white;
+}
+
+.cell.selected {
+    background-color: #abf7a8;
 }
 
 .cell:hover {
     outline: 1px solid black;
-}
-
-
-.odd {
-    background: #ffcc99;
-}
-
-.even {
-    background: white;
 }
 
 
