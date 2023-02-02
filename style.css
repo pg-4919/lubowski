@@ -43,11 +43,6 @@ body {
     background-color: #abf7a8;
 }
 
-.cell:hover {
-    outline: 1px solid black;
-}
-
-
 .piece {
     height: 50px;
     width: 50px;
