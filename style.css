@@ -7,11 +7,15 @@ body {
 }
 
 .board {
-    background-color: white;
     margin: 5vh auto;
     align-self: center;
     border-spacing: 0;
 }
+
+tr:first-child td:first-child { border-top-left-radius: 10px; }
+tr:first-child td:last-child { border-top-right-radius: 10px; }
+tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+tr:last-child td:last-child { border-bottom-right-radius: 10px; }
 
 .cell {
     height: 10vh;
@@ -19,7 +23,7 @@ body {
     min-width: 10vh;
     max-width: 10vh;
 
-    border: none;
+    border: 0px solid transparent;
     outline: 1px solid transparent;
 
     text-align: center;
@@ -27,20 +31,29 @@ body {
 
     user-select: none;
 
-    transition: outline 0.2s,
-        background-color 0.2s;
+    transition: outline 0.1s,
+        background-color 0.1s,
+        border-color 0.1s;
 }
 
 .cell.odd {
-    background-color: #ffcc99;
+    background-color: #decda2;
 }
 
 .cell.even {
-    background-color: white;
+    background-color: #f5f2e9;
 }
 
 .cell.selected {
     background-color: #abf7a8;
+}
+
+.cell:hover {
+    border: 5px solid #fffbf1;
+    height: calc(10vh - 10px);
+    width: calc(10vh - 10px);
+    min-width: calc(10vh - 10px);
+    max-width: calc(10vh - 10px);
 }
 
 .piece {
