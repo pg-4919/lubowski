@@ -6,10 +6,12 @@ export class Board {
     constructor(game) {
         this.game = game;
         this.element;
-        this.selected; // currently selected cell
-        this.hovered; // currently hovered cell
-        this.active; // currently active piece 
         this.data;
+
+        this.selection = {
+            active: null,
+            hovered: null
+        }
 
         this.init();
     }
@@ -41,6 +43,7 @@ export class Board {
         // bind the click event
         const tbody = this.element.tBodies.item(0);
         tbody.addEventListener("mousedown", this._mousedown.bind(this));
+        tbody.addEventListener("mouseover", this._mouseover.bind(this));
     }
 
     // returns the Pos of an HTML element in the board
@@ -50,31 +53,20 @@ export class Board {
         return Pos(x, y);
     }
 
-    // iterates so I don't have to
-    _iterate(eachRow, eachCell) {
-        for (let x = 0; x < 8; x++) {
-            if (eachRow instanceof Function) eachRow(x);
-            for (let y = 0; y < 8; y++)
-                if (eachCell instanceof Function) eachCell(x, y);
-        }
-    }
-
     // data accessor functions
     set = (pos, data) => this.data[pos.x][pos.y] = data;
     get = (pos) => this.data[pos.x][pos.y];
 
     // expose selection interface
-    select = pos => this.selected = pos;
-    deselect = () => this.selected = null;
-    activate = piece => this.active = piece;
-    deactivate = () => this.active = null;
+    select = pos => this.selection.active = pos;
+    deselect = () => this.selection.active = null;
 
     // mouse event handlers
     _mousedown(event) {
         const cell = event.target.closest("td");
         const pos = this.locate(cell);
 
-        this.iterate(null, (x, y) => {
+        this._iterate(null, (x, y) => {
             if (PosEqual(pos, Pos(x, y))) this.get(pos).toggle();
             else this.get(Pos(x, y)).deselect();
         });
@@ -82,10 +74,19 @@ export class Board {
     _mouseover(event) {
         const cell = event.target.closest("td");
         const pos = this.locate(cell);
-        this.hovered = pos;
+        this.selection.hovered = pos;
     }
     _mouseup(event) {
-        
+
+    }
+
+    // iterates so I don't have to
+    _iterate(eachRow, eachCell) {
+        for (let x = 0; x < 8; x++) {
+            if (eachRow instanceof Function) eachRow(x);
+            for (let y = 0; y < 8; y++)
+                if (eachCell instanceof Function) eachCell(x, y);
+        }
     }
 
 }
